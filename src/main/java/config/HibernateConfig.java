@@ -52,7 +52,7 @@ public class HibernateConfig {
         AnnotationSessionFactoryBean sessionFactoryBean = new AnnotationSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource);
         sessionFactoryBean.setHibernateProperties(hibProperties());
-        sessionFactoryBean.setPackagesToScan("model", "repository");
+        sessionFactoryBean.setPackagesToScan("model", "repository", "service");
         sessionFactoryBean.setConfigLocation(new ClassPathResource("hibernate.cfg.xml"));
         return sessionFactoryBean;
     }

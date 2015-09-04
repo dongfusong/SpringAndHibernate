@@ -1,19 +1,17 @@
-import com.huipay.oms.entity.CheckCode;
-import com.huipay.oms.manager.CheckCodeManager;
 import config.HibernateConfig;
 import config.WebConfig;
-import model.User1;
+import model.Tool;
+import model.ToolUser;
+import org.junit.After;
 import org.junit.Before;
 import org.springframework.context.annotation.Configuration;
-import repository.UserRepository;
+import repository.ToolUserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
-
-import javax.transaction.Transactional;
 
 /**
  * Created by Thoughtworks on 15/8/27.
@@ -24,7 +22,7 @@ import javax.transaction.Transactional;
 @Configuration
 public class TestHibernate {
     @Autowired
-    private UserRepository userRepository;
+    private ToolUserRepository userRepository;
 
 
     @Before
@@ -32,35 +30,58 @@ public class TestHibernate {
         userRepository.clear();
     }
 
-    @Test
-    public void testNew(){
-        User1 user1 = new User1("dongfusong");
-        userRepository.save(user1);
+    @After
+    public void tearDown(){
+
     }
 
-    @Test
-    public void testCore(){
-        userRepository.addCheckCode(new CheckCode());
-    }
-
-    @Test
-    @Transactional
-    public void testCoreInTest(){
-        addCheckCode();
-    }
-
-    public void addCheckCode(){
-        CheckCodeManager.getInstance().saveOrUpdate(new CheckCode());
-    }
+//
+//    @Test
+//    public void testNew(){
+//        ToolUser user1 = new ToolUser("dongfusong");
+//        userRepository.save(user1);
+//    }
+//
+//    @Test
+//    public void testCore(){
+//        userRepository.addCheckCode(new CheckCode());
+//    }
+//
+//    @Test
+//    @Transactional
+//    public void testCoreInTest(){
+//        addCheckCode();
+//    }
+//
+//    public void addCheckCode(){
+//        CheckCodeManager.getInstance().saveOrUpdate(new CheckCode());
+//    }
 
 
     @Test
     public void testFind(){
-        userRepository.save(new User1("dongfusong"));
-        userRepository.save(new User1("dongfupeng"));
-        userRepository.save(new User1("dongfuxx"));
-        User1 user = userRepository.find("dongfusong");
+        userRepository.save(new ToolUser("dongfusong"));
+        userRepository.save(new ToolUser("dongfupeng"));
+        userRepository.save(new ToolUser("dongfuxx"));
+        ToolUser user = userRepository.find("dongfusong");
         System.out.println(user.toString());
+        ToolUser user1 = userRepository.getByName("dongfusong");
+        user1.setName("dongfusong oh yes");
+        System.out.println(user1.toString());
+
+        userRepository.getAllUsers();
     }
+
+
+    @Test
+    public void testAddUser(){
+        ToolUser user = new ToolUser();
+        user.addTool(new Tool("dfs"));
+        user.addTool(new Tool("dfp"));
+        user.addTool(new Tool("dfc"));
+        userRepository.save(user);
+        userRepository.clear();
+    }
+
 }
 
