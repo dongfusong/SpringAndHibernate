@@ -5,6 +5,7 @@ import model.ToolUser;
 import org.junit.After;
 import org.junit.Before;
 import org.springframework.context.annotation.Configuration;
+import repository.ToolRepository;
 import repository.ToolUserRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +25,8 @@ public class TestHibernate {
     @Autowired
     private ToolUserRepository userRepository;
 
+    @Autowired
+    private ToolRepository toolRepository;
 
     @Before
     public void setUp(){
@@ -83,5 +86,14 @@ public class TestHibernate {
         userRepository.clear();
     }
 
+    @Test
+    public void testTool(){
+        Tool tool = new Tool("tool1");
+        tool.addImage("pic1");
+        tool.addImage("pic2");
+        tool.addImage("pic3");
+        tool.addImage("pic4");
+        toolRepository.save(tool);
+    }
 }
 

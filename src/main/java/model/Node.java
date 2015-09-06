@@ -23,6 +23,11 @@ public class Node {
     }
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "node_edge_relations",
+            joinColumns = {@JoinColumn(name = "node_id")},
+            inverseJoinColumns = {@JoinColumn(name = "edge_id")}
+    )
     List<Edge> edges = new ArrayList<Edge>();
 
     public void addEdge(Edge edge){
