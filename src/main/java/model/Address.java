@@ -7,6 +7,19 @@ import javax.persistence.Embeddable;
  */
 @Embeddable
 public class Address {
+    public Address(String street, String zipCode) {
+        this.street = street;
+        this.zipCode = zipCode;
+    }
+
     private String street;
     private String zipCode;
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "street='" + street + '\'' +
+                ", zipCode='" + zipCode + '\'' +
+                '}';
+    }
 }
