@@ -20,7 +20,6 @@ public class Tool {
     @Embedded
     private Address homeAddress;
 
-    ////mapping collections
     @CollectionOfElements(
             targetElement = java.lang.String.class
     )
@@ -30,7 +29,6 @@ public class Tool {
     )
     @Column(name = "image", nullable = false)
     private Set<String> images = new HashSet<String>();
-    ////mapping end
 
 
     @CollectionTable(name = "tool_maybeNames", joinColumns = {@JoinColumn(name = "tool_id")})

@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Thoughtworks on 15/9/6.
  */
@@ -12,11 +15,14 @@ public class Car {
         this.name = name;
     }
 
+    List<Address> carList = new ArrayList<Address>();
+
     @Override
     public String toString() {
         return "Car{" +
-                "name='" + name + '\'' +
+                "carList=" + carList +
                 ", address=" + address +
+                ", name='" + name + '\'' +
                 '}';
     }
 }
